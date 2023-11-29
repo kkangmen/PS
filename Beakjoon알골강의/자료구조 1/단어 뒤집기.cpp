@@ -10,11 +10,11 @@ int main(){
    stack<char> stack;
 
    cin >> testcase;
-   cin.ignore();
+   cin.ignore(); // 버퍼 비우기
 
    while (testcase--){
-    getline(cin, sentence);
-    sentence += ' ';
+    getline(cin, sentence); // 문자열 입력받기 (개행문자가 오기 전까지 입력)
+    sentence += ' '; // 문자열 마지막 개행문자(\n) 전에 공백 추가하기
 
     for (int i = 0; i < sentence.size(); i++){
         if(sentence[i] == ' '){
