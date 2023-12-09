@@ -1,26 +1,39 @@
 #include <iostream>
-#include <stack>
-#include <queue>
+#include <deque>
 
 using namespace std;
 
 int main(){
-    stack<int> stack;
-    queue<int> queue;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    
+    deque<int> dq;
     int N;
-    int A[N];
-    int B[N];
+    bool flag[100001];
     int M;
-    int C[M];
 
+    cin >> N;
     for (int i = 0; i < N; i++){
-        cin >> A[i];
+        cin >> flag[i];
     }
 
     for (int i = 0; i < N; i++){
-        if (A[i] == 0){
-            
+        int num;
+        cin >> num;
+        if (flag[i] == 0){
+            dq.push_back(num);
         }
     }
+
+    cin >> M;
+    for (int i = 0; i < M; i++){
+        int y;
+        cin >> y;
+        dq.push_front(y);
+        cout << dq.back() << " ";
+        dq.pop_back();
+    }
+
+
     return 0;
 }
