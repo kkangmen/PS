@@ -3,15 +3,35 @@
 
 using namespace std;
 
-int main(){
-    int m, n;
+void find_decimal(int, int);
 
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    int m ,n;
+    
     cin >> m >> n;
 
-    vector<bool> v (n+1, true);
-
-    for (int i = 2; i <= n; i++){
-        if ()
-    }
+    find_decimal(m, n);
     return 0;
+}
+
+void find_decimal(int a, int b){
+    vector<bool> v (b+1, true);
+
+    v[1] = false;
+    for (int i = 2; i <= b; i++){
+        if (v[i]){
+            for (int j = i + i; j <= b; j += i){
+                v[j] = false;
+            }
+        }
+    }
+
+    for (int i = a; i < v.size(); i++){
+        if (v[i]){
+            cout << i << '\n';
+        }
+    }
 }
