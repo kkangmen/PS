@@ -15,8 +15,7 @@ int main(){
     while (t--){
         cin >> h >> w >> n;
 
-        while (n > h){
-            
+        while (n / h > 1){
             back++;
             front = n % h;
             n = n / h;
