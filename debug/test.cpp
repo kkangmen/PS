@@ -20,6 +20,7 @@ int main(){
 
         if (order == "push"){
             cin >> num;
+            cin.ignore();
             stack.push(num);
         }
         else if (order == "top"){
