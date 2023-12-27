@@ -13,10 +13,9 @@ int main(){
     int num;
 
     cin >> t;
-    cin.ignore();
 
     while (t--){
-        getline(cin, order);
+        cin >> order;
 
         if (order == "push"){
             cin >> num;

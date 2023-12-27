@@ -11,18 +11,18 @@ int main(){
     int n;
     int num;
     int mem = 1;
+    int result = 0;
     stack <int> stack;
     vector <char> v;
 
     cin >> n;
 
+    v.push_back('+');
+    stack.push(1);
+ 
     while (n--){
         cin >> num;
 
-        if (mem == 1){
-            v.push_back('+');
-            stack.push(1);
-        }
         if (num >= mem){
             for (int i = mem + 1; i <= num; i++){
                 v.push_back('+');
@@ -34,16 +34,20 @@ int main(){
         if (stack.top() == num){
             v.push_back('-');
             stack.pop();
-            if (stack.empty()){
-                for (int i = 0; i < v.size(); i++){
-                    cout << v[i] << '\n';
-                }
-            }
         }
         else {
-            cout << "NO" << '\n';
-            break;
+            result++;
         }
     }
+
+    if (result == 0){
+        for (int i = 0; i < v.size(); i++){
+            cout << v[i] << '\n';
+        }
+    }
+    else{
+        cout << "NO" << '\n';
+    }
+
     return 0;
 }
