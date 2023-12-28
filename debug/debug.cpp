@@ -1,49 +1,30 @@
 #include <iostream>
-#include <stack>
-#include <vector>
 
 using namespace std;
 
 int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-
     int n;
-    int num;
-    int mem = 1;
-    stack <int> stack;
-    vector <char> v;
+    int cnt = 0;
+ 
 
     cin >> n;
 
-    while (n--){
-        cin >> num;
+    if (n < 100){
+        cout << n << '\n';
+    }
+    else {
+        cnt = 99;
 
-        if (mem == 1){
-            v.push_back('+');
-            stack.push(1);
-        }
-        if (num >= mem){
-            for (int i = mem + 1; i <= num; i++){
-                v.push_back('+');
-                stack.push(i);
-                mem = num;
+        for (int i = 100; i <= n; i++){
+            int hun = i / 100;
+            int ten = (i / 10) % 10;
+            int one = i % 10;
+
+            if (hun - ten == ten - one){
+                cnt++;
             }
         }
-
-        if (stack.top() == num){
-            v.push_back('-');
-            stack.pop();
-            if (stack.empty()){
-                for (int i = 0; i < v.size(); i++){
-                    cout << v[i] << '\n';
-                }
-            }
-        }
-        else {
-            cout << "NO" << '\n';
-            break;
-        }
+        cout << cnt << '\n';
     }
     return 0;
 }

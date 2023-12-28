@@ -2,8 +2,7 @@
 
 using namespace std;
 
-long long int top[30] = {0, };
-long long int bottom[30] = {0, };
+int dp[30][30];
 
 int main(){
     ios::sync_with_stdio(false);
@@ -11,23 +10,27 @@ int main(){
 
     int t;
     int n, m;
-
+    
     cin >> t;
 
     while (t--){
         cin >> n >> m;
 
-        top[0] = 1;
-        for (int i = 1; i <= m; i++){
-            top[i] = top[i-1] * i;
+        for (int i = 0; i <= n; i++){
+            for (int j = 1; j <= m; j++){
+                if (i == j){
+                    dp[i][j] = 1;
+                }
+                else if (i == 0){
+                    dp[i][j] = 1;
+                }
+                else{
+                    dp[i][j] = dp[i-1][j-1] + dp[i][j-1];
+                }
+            }
         }
 
-        bottom[0] = 1;
-        for (int i = 1; i <= m - n; i++){
-            bottom[i] = bottom[i-1] * i;
-        }
-
-        cout << top[m]/bottom[m-n] << '\n';
+        cout << dp[n][m] << '\n';
     }
     return 0;
 }
