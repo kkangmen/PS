@@ -1,39 +1,59 @@
 #include <iostream>
 #include <stack>
+#include <vector>
 
 using namespace std;
 
 int main(){
-    int N;
+    int n;
     int num;
-    stack<int> stack1;
-    stack<int> stack2;
+    int cnt = 1;
+    int result = 0;
 
-    cin >> N;
+    vector <int> v;
+    stack <int> stack;
 
-    cin >> num;
-    stack1.push(num);
-    for (int i = 0; i < N-1; i++){
+    cin >> n;
+
+    while (n--){
         cin >> num;
+        v.push_back(num);
+    }
 
-        if (num > stack1.top()){
-            stack2.push(stack1.top());
-            stack1.pop();
-            stack1.push(num);
+    for (int i = 0; i < v.size(); i++){
+        if (cnt == v[i]){
+
+            cnt++;
         }
         else {
-            stack1.push(num);
+            while (!stack.empty() && stack.top() == cnt){
+                stack.pop();
+                cnt++;
+            }
+            if (stack.empty()){
+                stack.push(v[i]);
+            }
+            else {
+                if (stack.top() == cnt){
+                    stack.pop();
+                    cnt++;
+                }
+                if (stack.top() < v[i]){
+                    result++;
+                    break;
+                }
+                else {
+                    stack.push(v[i]);
+                }
+            }
         }
     }
-    
 
-    if (stack2.size() > 1){
-        cout << "Sad" << endl;
+    if (result == 0){
+        cout << "Nice" << '\n';
     }
-    else{
-        cout << "Nice" << endl;
+    else {
+        cout << "Sad" << '\n';
     }
-
-
     return 0;
 }

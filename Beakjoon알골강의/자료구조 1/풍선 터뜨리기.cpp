@@ -9,7 +9,6 @@ int main(){
     int n;
     int result = 0;
     int minus = 0;
-    int absminus = 0;
     vector <int> v;
     deque <int> dq;
 
@@ -29,10 +28,9 @@ int main(){
         for (int i = 0; i < n; i++){
             if (dq.front() > 0){
                 result = dq.front();
-                for (int j = 0; j < n; j++){
-                    if (arr[j] == result){
-                        v.push_back(j+1);
-                        break;
+                for (int i = 0; i < n; i++){
+                    if (arr[i] == result){
+                        v.push_back(i+1);
                     }
                 }
                 minus = dq.front();
@@ -40,31 +38,27 @@ int main(){
                 while (minus-1){
                     dq.push_back(dq.front());
                     dq.pop_front();
-                    minus--;
                 }
             }
             else {
                 result = dq.front();
-                for (int j = 0; j < n; j++){
-                    if (arr[j] == result){
-                        v.push_back(j+1);
-                        break;
+                for (int i = 0; i < n; i++){
+                    if (arr[i] == result){
+                        v.push_back(i+1);
                     }
                 }
                 minus = dq.front();
-                absminus = abs(minus);
                 dq.pop_front();
-                while (absminus){
+                while (abs(minus)){
                     dq.push_front(dq.back());
                     dq.pop_back();
-                    absminus--;
                 }
             }
         }
     }
 
     for (int i = 0 ; i < v.size(); i++){
-        cout << v[i] << ' ';
+        cout << v[i] << '\n';
     }
     return 0;
 }
