@@ -1,24 +1,38 @@
 #include <iostream>
+#include <vector>
 #include <stack>
 
 using namespace std;
 
-int A[1000001];
-
 int main(){
-    stack<int> stack;
     int n;
-
+    
     cin >> n;
 
-    for (int i = 1; i < n+1; i++){
-        cin >> A[i];
+    vector<int> a(n);
+    vector<int> ans(n);
+    for (int i = 0; i < n; i++){
+        cin >> a[i];
     }
-
-    for (int i = 1; i < n+1; i++){
-        stack.push(A[i]);
-        
+    stack<int> s;
+    s.push(0);
+    for (int i = 1; i < n; i++){
+        if (s.empty()){
+            s.push(i);
+        }
+        while (!s.empty() && a[s.top()] < a[i]){
+            ans[s.top()] = a[i];
+            s.pop();
+        }
+        s.push(i);
     }
-    
+    while (!s.empty()){
+        ans[s.top()] = -1;
+        s.pop();
+    }
+    for (int i = 0; i < n; i++){
+        cout << ans[i] << ' ';
+    }
+    cout << '\n';
     return 0;
 }

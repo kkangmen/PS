@@ -7,12 +7,12 @@ int gcd(int, int);
 
 int main(){
     int n, s;
-    int max_d = 0;
 
     cin >> n >> s;
 
     int bro[n];
     int distance[n];
+    int gcd_arr[n-1];
 
     for (int i = 0; i < n; i++){
         cin >> bro[i];
@@ -26,12 +26,17 @@ int main(){
     }
 
     for (int i = 0; i < n; i++){
-        for (int j = i+1; j < n; j++){
-            max_d = max(max_d, gcd(distance[i], distance[j]));
+        gcd_arr[i] = gcd(distance[i], distance[i+1]);
+    }
+
+    long long int ans = gcd_arr[0];
+    for (int i = 1; i < n-1; i++){
+        if (ans > gcd_arr[i]){
+            ans = gcd_arr[i];
         }
     }
 
-    cout << max_d << '\n';
+    cout << ans << '\n';
     return 0;
 }
 
