@@ -1,10 +1,10 @@
 #include <iostream>
 
 using namespace std;
- 
-int main(){
 
-    int k[1000000];
+int k[1000001];
+
+int main(){
     int n;
 
     cin >> n;
@@ -20,6 +20,9 @@ int main(){
         }
     }
 
+    // for (int i = 1; i <= n; i++){
+    //     cout << k[i] << ' ';
+    // }
     cout << k[n] << endl;
     
     return 0;
