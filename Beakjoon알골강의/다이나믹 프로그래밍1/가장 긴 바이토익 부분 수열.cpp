@@ -1,56 +1,44 @@
 #include <iostream>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
 
+vector<int> d(1000);
+vector<int> a(1000);
+vector<int> k(1000);
+
 int main(){
     int n;
-    int max_front = 1;
-    int max_back = 1;
-    int max_index = 0;
-
     cin >> n;
-
-    int A[n] = {0, };
-    int D[n] = {0, };
-
-    for (int i = 0; i < n; i++){
-        cin >> A[i];
+    for (int i = 0 ; i < n; i++){
+        cin >> a[i];
     }
 
     for (int i = 0; i < n; i++){
-        D[i] = 1;
+        d[i] = 1;
         for (int j = 0; j < i; j++){
-            if (A[j] < A[i] && D[i] < D[j] + 1){
-                D[i] = D[j] + 1;
+            if (a[j] < a[i] && d[i] < d[j] + 1){
+                d[i] = d[j] + 1;
             }
         }
     }
 
-    for (int i = 0; i < n; i++){
-        max_front = max(max_front, D[i]);
-    }
-
-    for (int i = 0; i < n; i++){
-        if (max_front == D[i]){
-            max_index = i;
-        }
-    }
-
-    for (int i = max_index + 1; i < n; i++){
-        D[i] = 1;
-        for (int j = max_index + 1; j < i; j++){
-            if (A[j] > A[i] && D[i] < D[j] + 1){
-                D[i] = D[j] + 1;
+    for (int i = n-1; i >= 0; i--){
+        k[i] = 1;
+        for (int j = n-1; j > i; j--){
+            if (a[j] < a[i] && k[i] < k[j] + 1){
+                k[i] = k[j] + 1;
             }
         }
     }
-
-    for (int i = max_index + 1; i < n; i++){
-        max_back = max(max_back, D[i]);
+    
+    int ans = d[0] + k[0] -1;
+    for (int i = 0; i < n; i++){
+        if (ans < d[i]+k[i]-1){
+            ans = d[i]+k[i]-1;
+        }
     }
-
-    cout << max_front + max_back << '\n';
-
+    cout << ans << '\n';
     return 0;
 }

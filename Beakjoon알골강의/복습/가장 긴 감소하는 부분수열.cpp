@@ -1,23 +1,23 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
 vector<int> d(1000);
-vector<int> arr(1000);
+vector<int> a(1000);
 
 int main(){
     int n;
     cin >> n;
-    for (int i = 0 ; i < n; i++){
-        cin >> arr[i];
+    for (int i = 0; i < n; i++){
+        cin >> a[i];
     }
 
     for (int i = 0; i < n; i++){
         d[i] = 1;
         for (int j = 0; j < i; j++){
-            if (arr[j] < arr[i] && d[i] < d[j] + 1){
+            if (a[j] > a[i] && d[i] < d[j] + 1){
                 d[i] = d[j] + 1;
             }
         }
