@@ -11,7 +11,7 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    vector<int> v(3);
+    vector<int> v;
     for (int i = 0; i < 3; i++){
         int x;
         cin >> x;
