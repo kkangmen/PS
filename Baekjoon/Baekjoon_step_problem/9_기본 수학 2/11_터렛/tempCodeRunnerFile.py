@@ -1,1 +1,0 @@
-down_radius_distance
