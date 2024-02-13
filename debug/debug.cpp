@@ -1,30 +1,32 @@
 #include <iostream>
-
+#include <string>
 using namespace std;
 
-int n, m;
-int a[10];
-int isused[10];
-void func(int p){
-    if (p == m){
-        for (int i = 0; i < m; i++){
-            cout << a[i] << ' ';
-        }
-        cout << '\n';
-        return ;
+int main()
+{
+    string s1;
+    string s2;
+    string temp;
+    int cnt = 0, m = 0;
+    
+    cin >> s1 >> s2;
+    if (s1.size() > s2.size()) {
+        temp = s1;
+        s1 = s2;
+        s2 = temp;
     }
-
-    for (int i = 1; i <= n; i++){
-        if (isused[i] == 0){
-            a[p] = i;
-            isused[i] = 1;
-            func(p+1);
-            isused[i] = 0;
+    
+    for(int k=0; k<s1.size(); k++)  {
+        for (int i = k; i < s1.size(); i++) {
+            for (int j = 0; j < s2.size(); j++) {
+                if (s1[i] == s2[j]) {
+                    cnt++;
+                    i += 1;
+                }
+            }
         }
+        if (m < cnt) m = cnt;
+        cnt = 0;
     }
-}
-int main(){
-    cin >> n >> m;
-    func(0);
-    return 0;
+    cout << m;
 }
