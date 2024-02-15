@@ -1,59 +1,38 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
+#include<iostream>
 using namespace std;
 
-vector<long long> v;
+string s;
+int N;
+int video[64][64];
 
-bool check_blueray(vector<long long>& v, long long taget, long long size);
-
-int main(){
-    int n, m;
-    cin >> n >> m;
-    long long sum = 0;
-    for (int i = 0; i < n; i++){
-        int x;
-        cin >> x;
-        v.push_back(x);
-        sum += x;
-    }
-
-    long long left = 1;
-    long long right = sum;
-    long long ans = sum;
-    while (left <= right){
-        long long mid = (left+right)/2;
-        
-        if (mid >= *max_element(v.begin(), v.end()) && check_blueray(v, mid, m)){
-            ans = min(mid, ans);
-            right = mid-1;
-        }
-        else {
-            left = mid+1;
-        }
-    }
-
-    cout << ans << '\n';
-    return 0;
+void solve(int x, int y, int size)
+{
+	for (int i = x; i < x + size; i++)
+		for (int j = y; j < y + size; j++)
+		{
+			if (video[i][j] != video[x][y])
+			{
+				cout << "(";
+				solve(x, y, size / 2);
+				solve(x, y + size / 2, size / 2);
+				solve(x + size / 2, y, size / 2);
+				solve(x + size / 2, y + size / 2, size / 2);
+				cout << ")";
+				return;
+			}
+		}
+	cout << video[x][y];
 }
 
-bool check_blueray(vector<long long>& v, long long target, long long size){
-    long long cnt = 1;
-    long long sum = 0;
-    for (int i = 0; i < v.size(); i++){
-        sum += v[i];
-        if (sum > target){
-            cnt++;
-            i--;
-            sum = 0;
-        }
-    }
+int main()
+{
+	cin >> N;
+	for (int i = 0; i < N; i++)
+	{
+		cin >> s;
+		for (int j = 0; j < N; j++)
+			video[i][j] = s[j] - '0';
+	}
+	solve(0, 0, N);
 
-    if (cnt <= size){
-        return true;
-    }
-    else{
-        return false;
-    }
 }
