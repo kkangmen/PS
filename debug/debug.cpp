@@ -1,35 +1,25 @@
 #include <iostream>
-#define MOD 1234567891
+
 using namespace std;
 
-long long func(long long r, long long i){
-	if (i == 0){
-		return 1;
-	}
-    if (i == 1){
-        return r % MOD;
-    }
+void sizeArray(int a[], int size){
+	int size_func;
 
-    long long temp = func(r, i/2);
-    temp = (temp*temp) % MOD;
-    if (i%2 == 0){
-        return temp;
-    }
-    else {
-        return temp*i;
-    }
+	size_func = sizeof(a)/sizeof(a[0]);
+
+	cout << "전달된 함수의 size는 : " << size_func << '\n';
 }
+
 int main(){
-	int n;
-	cin >> n;
-	string s;
-	cin >> s;
+	int n[] = {1, 2, 3, 4, 5};
 
-	long long sum = 0;
-	for (int i = 0; i < s.length(); i++){
-		sum += ((s[i]-96)*func(31, i)) % MOD;
-	}
+	int size;
 
-	cout << sum << '\n';
+	size = sizeof(n)/sizeof(n[0]);
+
+	cout << "함수의 size는 : " << size <<'\n';
+
+	sizeArray(n, size);
+
 	return 0;
 }
