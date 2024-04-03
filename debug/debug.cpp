@@ -2,24 +2,33 @@
 
 using namespace std;
 
-void sizeArray(int a[], int size){
-	int size_func;
-
-	size_func = sizeof(a)/sizeof(a[0]);
-
-	cout << "전달된 함수의 size는 : " << size_func << '\n';
-}
+class Circle{
+private:
+	int radius;
+public:
+	void setRadius(int radius){this->radius = radius;}
+	double getArea(){return radius*radius*3.14;}
+};
 
 int main(){
-	int n[] = {1, 2, 3, 4, 5};
+	int circle;
+	cout << "원의 개수 >> ";
+	cin >> circle;
 
-	int size;
+	Circle *pArray = new Circle[circle];
+	for (int i = 0; i < circle; i++){
+		int radius;
+		cout << "원 " << i+1 << "의 반지름 >> ";
+		cin >> radius;
+		pArray[i].setRadius(radius);
+	}
 
-	size = sizeof(n)/sizeof(n[0]);
-
-	cout << "함수의 size는 : " << size <<'\n';
-
-	sizeArray(n, size);
-
+	int count = 0;
+	for (int i = 0; i < circle; i++){
+		if (pArray[i].getArea()>100){
+			count++;
+		}
+	}
+	cout << "면적이 100보다 큰 원은 " << count << "개 입니다." << '\n';
 	return 0;
 }
