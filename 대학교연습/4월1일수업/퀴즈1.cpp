@@ -23,10 +23,8 @@ public:
     }
 };
 void Sample::read(){
-    int num;
     cout << "입력하려는 정수의 개수는? ";
-    cin >> num;
-    size = num;
+    cin >> size;
     cout << size << "개의 정수를 입력하시오. ";
     for (int i = 0; i < size; i++){
         cin >> p[i];
