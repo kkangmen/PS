@@ -6,7 +6,9 @@ private:
     int capacity;
     int *mem;
 protected:
-    BaseArray(int capacity = 100){};
+    BaseArray(int capacity = 100){
+        this->capacity = capacity;
+    };
     ~BaseArray(){
         delete []mem;
     };
@@ -31,6 +33,12 @@ protected:
     void deleteMem(){
         delete []mem;
     }
+    void printarr(){
+        for (int i = 0; i < 5; i++){
+            cout << mem[i] << ' ';
+        }
+        cout << '\n';
+    }
 };
 
 class MyStack : public BaseArray{
@@ -53,6 +61,7 @@ public:
             }
             deleteMem();
             putMem(bigmem);
+            delete []bigmem;
         }
         put(tos, n);
     }
@@ -75,16 +84,21 @@ public:
     int length(){
         return tos+1;
     }
+    void print(){
+        printarr();
+    }
 };
 
 int main(){
     MyStack mStack(1);
+
     int n;
-    cout << "스택에 삽입할 5개의 정수를 입력하라>> ";
+    cout << "스택에 삽입할 5개의 정수를 입력하라>>";
     for (int i = 0; i < 5; i++){
         cin >> n;
         mStack.push(n);
     }
+    mStack.print();
     cout << "스택 용량:" << mStack.capacity() << ", 스택 크기:" << mStack.length() << '\n';
     cout << "스택의 모든 원소를 팝하여 출력한다>> ";
     while (mStack.length() > 0){
