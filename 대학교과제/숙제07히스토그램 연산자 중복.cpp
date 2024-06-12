@@ -10,17 +10,18 @@ private:
 public: 
     Histogram(string s){
         str = s;
+        makeHisto();
     }
     void makeHisto(){
-        int alphat_cnt = 0;
+        //int alphat_cnt = 0;
         for (int i = 0; i < str.size(); i++){
             str[i] = tolower(str[i]);
             if(isalpha(str[i])){
                 count[str[i]-97]++;
-                alphat_cnt++;
+                //alphat_cnt++;
             }
         }
-        cout << "ÃÑ ¾ËÆÄºª ¼ö " << alphat_cnt << '\n';
+        //cout << "ÃÑ ¾ËÆÄºª ¼ö " << alphat_cnt << '\n';
     }
     void operator!(){
         for (int i = 0; i < 26; i++){

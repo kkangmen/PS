@@ -14,7 +14,7 @@ public:
     void Output(){
         cout << re << " + " << im << "i" << '\n';
     }
-    Complex& operator+=(Complex op1);
+    Complex& operator+=(Complex& op1);
     Complex& operator-();
     friend Complex operator+(Complex& op1, Complex& op2);
     friend Complex operator++(Complex& op1);
@@ -22,7 +22,11 @@ public:
     friend ostream& operator<<(ostream& os, Complex& op1);
 };
 
-Complex& Complex::operator+=(Complex op1){
+Complex& Complex::operator+=(Complex& op1){
+    // Complex tmp;
+    // tmp.re += op1.re;
+    // tmp.im += op1.im;
+    // return tmp;
     this->re += op1.re;
     this->im += op1.im;
     return *this;

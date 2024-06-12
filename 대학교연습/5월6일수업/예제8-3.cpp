@@ -3,10 +3,11 @@
 using namespace std;
 
 class TV{
-private:
     int size;
 public:
-    TV(){size = 20;}
+    // TV(){
+    //     size = 20;
+    // }
     TV(int size){
         this->size = size;
     }
@@ -14,9 +15,7 @@ public:
         return size;
     }
 };
-
 class WideTV : public TV{
-private:
     bool videoln;
 public:
     WideTV(int size, bool videoln) : TV(size){
@@ -28,20 +27,19 @@ public:
 };
 
 class SmartTV : public WideTV{
-private:
     string ipAddr;
 public:
     SmartTV(string ipAddr, int size) : WideTV(size, true){
         this->ipAddr = ipAddr;
     }
-    string getipAddr(){
+    string getIpAddr(){
         return ipAddr;
     }
 };
 
 int main(){
-    SmartTV htv("192.0.0.1", 32);
-    cout << htv.getSize() << '\n';
-    cout << boolalpha << htv.getVideoln() << '\n';
-    cout << htv.getipAddr() << '\n';
+    SmartTV htv("192.0.0.1" , 32);
+    cout << "size=" << htv.getSize() << '\n';
+    cout << "videoln=" << boolalpha << htv.getVideoln() << '\n';
+    cout << "IP=" << htv.getIpAddr() << '\n';
 }

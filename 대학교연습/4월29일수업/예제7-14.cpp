@@ -6,12 +6,12 @@ class Complex{
 private:
     double x, y;
 public:
-    Complex(double x, double y){
+    Complex(double x = 0.0, double y = 0.0){
         this->x = x;
         this->y = y;
     }
     Complex operator+(const Complex &v2) const{
-        Complex v(0.0, 0.0);
+        Complex v;
         v.x = this->x + v2.x;
         v.y = this->y + v2.y;
         return v;

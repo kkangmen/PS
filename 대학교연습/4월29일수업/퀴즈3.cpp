@@ -12,9 +12,9 @@ public:
         this->y = y;
     }
     Complex operator+(const Complex& v2) const{
-        Complex v(0.0, 0.0);
-        v.x = this->x + v2.x;
-        v.y = this->y + v2.y;
+        Complex v;
+        v.x = x + v2.x;
+        v.y = y + v2.y;
         return v;
     }
     void display(){
@@ -22,11 +22,11 @@ public:
     }
 };
 
-istream& operator>>(istream& is, Complex& v){
+istream& operator>>(istream& is, Complex &v){
     is >> v.x >> v.y;
     return is;
 }
-ostream& operator<<(ostream& os, Complex& v){
+ostream& operator<<(ostream& os, Complex &v){
     os << '(' << v.x << ',' << v.y << 'i' << ')' << '\n';
     return os;
 }

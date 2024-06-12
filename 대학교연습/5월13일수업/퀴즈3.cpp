@@ -23,12 +23,27 @@ class NamedCircle: public Circle{
     int r;
     string name;
 public:
+    NamedCircle(int radius = 0, string name = ""):Circle(radius){
+        this->name = name;
+    }
     void set(int r, string name){
-        
+        setRadius(r);
+        this->name = name;
+    }
+    string getName(){
+        return name;
     }
 };
 
-
+string biggest(NamedCircle c[], int n){
+    int ans = 0;
+    for (int i = 0; i < n; i++){
+        if (c[ans].getArea() < c[i].getArea()){
+            ans = i;
+        }   
+    }
+    return c[ans].getName();
+}
 
 int main(){
     NamedCircle c[5];

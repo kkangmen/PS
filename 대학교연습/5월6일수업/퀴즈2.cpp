@@ -3,7 +3,6 @@
 using namespace std;
 
 class Car{
-private:
     int speed = 0;
     int gear;
     string color;
@@ -21,28 +20,34 @@ public:
         speed -= decrement;
     }
     void showCar(){
-        cout << "현재속도 = " << speed << "주행거리 = " << gear << "색상 = " << color << '\n';
+        cout << "현재속도= " << speed << "주행거리= " << gear << "색상= " << color << '\n';
     }
 };
 
-class SportCar : public Car{
-private:
+class SportsCar : public Car{
     bool turbo;
 public:
-    bool setTurbo(){
-        
+    void setTurbo(bool turbo){
+        this->turbo = turbo;
     }
     void showSportCar(){
-
+        showCar();
+        if (turbo){
+            cout << "turbo 장착됨" << "\n";
+        }
+        else{
+            cout << "turbo 장착되지 않음" << '\n';
+        }
     }
 };
+
 int main(){
-    SportCar sc;
+    SportsCar sc;
     sc.setColor("Red");
-    sc.setFear(3);
+    sc.setGear(3);
     sc.speedUp(100);
     sc.speedDown(30);
-    sc.setRurbo(true);
+    sc.setTurbo(true);
     sc.showSportCar();
     return 0;
 }
