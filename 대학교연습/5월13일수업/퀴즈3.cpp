@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <math.h>
 using namespace std;
 
 class Circle{
@@ -46,6 +47,7 @@ string biggest(NamedCircle c[], int n){
 }
 
 int main(){
+    
     NamedCircle c[5];
     cout << "5개의 정수 반지름과 원의 이름을 입력하세요" << '\n';
     for (int i = 0; i < 5; i++){
