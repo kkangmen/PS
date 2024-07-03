@@ -4,7 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\mingw64\\TIL\\대학교연습\\Box.h"
+                //"C:\\mingw64\\TIL\\대학교연습\\Box.h"
             ],
             "defines": [
                 "_DEBUG",
