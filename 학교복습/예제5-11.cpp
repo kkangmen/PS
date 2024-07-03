@@ -27,7 +27,7 @@ Person::Person(Person& person){
     int len = strlen(person.name);
     this->name = new char[len+1];
     strcpy(this->name, person.name);
-    cout << "º¹»ç »ı¼ºÀÚ ½ÇÇà. ¿øº» °´Ã¼ÀÇ ÀÌ¸§" << this->name << '\n';
+    cout << "ë³µì‚¬ ìƒì„±ì ì‹¤í–‰. ì›ë³¸ ê°ì²´ì˜ ì´ë¦„" << this->name << '\n';
 }
 Person::Person(int id, const char* name){
     this->id = id;
@@ -44,12 +44,12 @@ int main(){
     Person father(1, "Kitae");
     Person daughter(father);
 
-    cout << "daughter °´Ã¼ »ı¼º Á÷ÈÄ ----" << '\n';
+    cout << "daughter ê°ì²´ ìƒì„± ì§í›„ ----" << '\n';
     father.show();
     daughter.show();
 
     daughter.changeName("Grace");
-    cout << "daughter ÀÌ¸§À» Grace·Î º¯°æÇÑ ÈÄ ----" << '\n';
+    cout << "daughter ì´ë¦„ì„ Graceë¡œ ë³€ê²½í•œ í›„ ----" << '\n';
     father.show();
     daughter.show();
 

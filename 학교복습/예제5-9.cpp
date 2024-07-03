@@ -1,4 +1,4 @@
-//CircleÀÇ º¹»ç »ı¼ºÀÚ¿Í °´Ã¼ º¹»ç
+//Circleì˜ ë³µì‚¬ ìƒì„±ìì™€ ê°ì²´ ë³µì‚¬
 #include <iostream>
 using namespace std;
 
@@ -15,12 +15,12 @@ public:
 
 Circle::Circle(Circle& c){
     this->radius = c.radius;
-    cout << "º¹»ç »ı¼ºÀÚ ½ÇÇà radius = " << radius << '\n';
+    cout << "ë³µì‚¬ ìƒì„±ì ì‹¤í–‰ radius = " << radius << '\n';
 }
 int main(){
     Circle src(30);
-    Circle dest(src); //dest °´Ã¼°¡ »ı¼ºµÉ ¶§ Circle(Circle& c)
+    Circle dest(src); //dest ê°ì²´ê°€ ìƒì„±ë  ë•Œ Circle(Circle& c)
 
-    cout << "¿øº»ÀÇ ¸éÀû = " << src.getArea() << '\n';
-    cout << "»çº»ÀÇ ¸éÀû = " << dest.getArea() << '\n';
+    cout << "ì›ë³¸ì˜ ë©´ì  = " << src.getArea() << '\n';
+    cout << "ì‚¬ë³¸ì˜ ë©´ì  = " << dest.getArea() << '\n';
 }
