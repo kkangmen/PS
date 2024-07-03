@@ -1,19 +1,19 @@
-//°£´ÜÇÑ ÂüÁ¶ ¸®ÅÏ »ç·Ê
+//ê°„ë‹¨í•œ ì°¸ì¡° ë¦¬í„´ ì‚¬ë¡€
 #include <iostream>
 using namespace std;
 
 char& find(char s[], int index){
-    return s[index]; // s[index] °ø°£ÀÇ ÂüÁ¶ ¸®ÅÏ
+    return s[index]; // s[index] ê³µê°„ì˜ ì°¸ì¡° ë¦¬í„´
 }
 
 int main(){
     char name[] = "Mike";
     cout << name << '\n';
 
-    find(name,0) = 'S'; // find°¡ ¸®ÅÏÇÑ À§Ä¡¿¡ ¹®ÀÚ 'M' ÀúÀå
+    find(name,0) = 'S'; // findê°€ ë¦¬í„´í•œ ìœ„ì¹˜ì— ë¬¸ì 'M' ì €ì¥
     cout << name << '\n';
 
-    char& ref = find(name, 2); // ref´Â name[2] ÂüÁ¶
+    char& ref = find(name, 2); // refëŠ” name[2] ì°¸ì¡°
     ref = 't';
     cout << name << '\n';
     return 0;
