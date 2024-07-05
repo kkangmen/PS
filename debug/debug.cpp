@@ -1,46 +1,56 @@
 #include <iostream>
+#include <vector>
 #include <algorithm>
 using namespace std;
-
-int t, m, n, k, x, y, ans;
-int field[50][50];
-int xpos[4] = {0, 0, -1, 1};
-int ypos[4] = {1, -1, 0, 0};
-
-void dfs(int x, int y) {
-	field[x][y] = 0;
-	for (int i = 0; i < 4; i++) {
-		int xx = x + xpos[i];
-		int yy = y + ypos[i];
-		if (xx < 0 || yy < 0 || xx >= m || yy >= n) continue;
-		if (field[xx][yy] == 1) {
-			dfs(xx, yy);
-		}
-	}
+int check(vector<string> &a) {
+    int n = a.size();
+    int ans = 1;
+    for (int i=0; i<n; i++) {
+        int cnt = 1;
+        for (int j=1; j<n; j++) {
+            if (a[i][j] == a[i][j-1]) {
+                cnt += 1;
+            } else {
+                cnt = 1;
+            }
+            if (ans < cnt) ans = cnt;
+        }
+        cnt = 1;
+        for (int j=1; j<n; j++) {
+            if (a[j][i] == a[j-1][i]) {
+                cnt += 1;
+            } else {
+                cnt = 1;
+            }
+            if (ans < cnt) ans = cnt;
+        }
+    }
+    return ans;
 }
-
 int main() {
-	cin >> t;
-	for (int q = 0; q < t; q++) {
-		cin >> m >> n >> k;
-		for (int i = 0; i < k; i++) {
-			cin >> x >> y;
-			field[x][y] = 1;
-		}
-
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {
-				if (field[i][j] == 1) {
-					dfs(i, j);
-					ans++;
-				}
-			}
-		}
-
-		cout << ans << '\n';
-		ans = 0;
-		for (int i = 0; i < m; i++) {
-			fill(field[i], field[i] + n, 0);
-		}
-	}
+    int n;
+    cin >> n;
+    vector<string> a(n);
+    for (int i=0; i<n; i++) {
+        cin >> a[i];
+    }
+    int ans = 0;
+    for (int i=0; i<n; i++) {
+        for (int j=0; j<n; j++) {
+            if (j+1 < n) {
+                swap(a[i][j], a[i][j+1]);
+                int temp = check(a);
+                if (ans < temp) ans = temp;
+                swap(a[i][j], a[i][j+1]);
+            }
+            if (i+1 < n) {
+                swap(a[i][j], a[i+1][j]);
+                int temp = check(a);
+                if (ans < temp) ans = temp;
+                swap(a[i][j], a[i+1][j]);
+            }
+        }
+    }
+    cout << ans << '\n';
+    return 0;
 }
