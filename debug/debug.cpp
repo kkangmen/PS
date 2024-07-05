@@ -1,37 +1,46 @@
 #include <iostream>
-#include <vector>
-#include <string>
+#include <algorithm>
 using namespace std;
 
-bool isvisted[4][5];
-int cnt = 0;
+int t, m, n, k, x, y, ans;
+int field[50][50];
+int xpos[4] = {0, 0, -1, 1};
+int ypos[4] = {1, -1, 0, 0};
 
-void dfs(int row, int column){
-    
-    isvisted[row][column] = true;
-    dfs(row-1, column);
-    dfs()
+void dfs(int x, int y) {
+	field[x][y] = 0;
+	for (int i = 0; i < 4; i++) {
+		int xx = x + xpos[i];
+		int yy = y + ypos[i];
+		if (xx < 0 || yy < 0 || xx >= m || yy >= n) continue;
+		if (field[xx][yy] == 1) {
+			dfs(xx, yy);
+		}
+	}
 }
 
-int main(){
-    int n, m;
-    cin >> n >> m;
-    string str;
+int main() {
+	cin >> t;
+	for (int q = 0; q < t; q++) {
+		cin >> m >> n >> k;
+		for (int i = 0; i < k; i++) {
+			cin >> x >> y;
+			field[x][y] = 1;
+		}
 
-    vector<vector<int>> ice(n, vector<int>(m,0));
-    for (int i = 0; i < n; i++){
-        cin >> str;
-        for (int j = 0;  j < m; j++){
-            ice[i][j] = str[j]-'0';
-        }
-    }
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				if (field[i][j] == 1) {
+					dfs(i, j);
+					ans++;
+				}
+			}
+		}
 
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < m; j++){
-            if (ice[i][j] == 0 && isvisted[i][j] == false){
-                dfs(i, j);
-            }
-        }
-    }
-    return 0;
+		cout << ans << '\n';
+		ans = 0;
+		for (int i = 0; i < m; i++) {
+			fill(field[i], field[i] + n, 0);
+		}
+	}
 }
