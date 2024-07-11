@@ -4,49 +4,63 @@
 using namespace std;
 
 int graph[51][51];
-int m, n, k, row , column;
-
-void dfs(int x, int y){
-    if (x <= -1 || x >= row || y <= -1 || y >= column){
-        return;
-    }
-    if (graph[x][y] == 0){
-        return;
-    }
-    
+int dx[4] = {1, -1, 0, 0};
+int dy[4] = {0, 0, 1, -1};
+int ts, n, m, k;
+void dfs(int x, int y)
+{
     graph[x][y] = 0;
-    dfs(x-1, y);
-    dfs(x+1, y);
-    dfs(x, y-1);
-    dfs(x, y+1);
+    for (int i = 0; i < 4; i++)
+    {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+        if (0 <= nx && nx < n && 0 <= ny && ny < m && graph[nx][ny])
+        {
+            dfs(nx, ny);
+        }
+    }
 }
-void reset(){
-    
+void reset()
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            graph[i][j] = 0;
+        }
+    }
 }
-int main() {
+int main()
+{
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-    
-    int testcase;
-    cin >> testcase;
-    for (int i = 0; i < testcase; i++){
-        int count = 0;
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    cin >> ts;
+    while (ts--)
+    {
+        reset();
         cin >> m >> n >> k;
-        for (int j = 0; j < k; j++){
-            cin >> row >> column;
-            graph[row][column] = 1;
+        for (int i = 0; i < k; i++)
+        {
+            int a, b;
+            cin >> a >> b;
+            graph[b][a] = 1;
         }
 
-        for (int i = 0; i < m; i++){
-            for (int j = 0; j < n; j++){
-                if (graph[i][j] == 1){
+        int cnt = 0;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (graph[i][j])
+                {
                     dfs(i, j);
-                    count++;
+                    cnt++;
                 }
             }
         }
-        cout << count << '\n';
-        reset();
+        cout << cnt << '\n';
     }
     return 0;
 }
