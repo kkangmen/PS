@@ -3,12 +3,13 @@
 
 using namespace std;
 
-int main(){
+int main()
+{
     string str;
     string address("¼­¿ï½Ã ¼ººÏ±¸ »ï¼±µ¿ 389");
     string copyAddress(address);
 
-    char text[] = {'L','o','v','e',' ','C','+','+','\0'};
+    char text[] = {'L', 'o', 'v', 'e', ' ', 'C', '+', '+', '\0'};
     string title(text);
 
     cout << str << '\n';
