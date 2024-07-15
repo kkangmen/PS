@@ -2,38 +2,45 @@
 
 using namespace std;
 
-class Circle{
-    private:
+class Circle
+{
+private:
     int radius;
-    public:
+
+public:
     Circle();
     Circle(int r);
     ~Circle();
-    double getArea(){return 3.14*radius*radius;}
-    int getRadius(){return radius;}
-    void setRadius(int radius){this->radius = radius;}
+    double getArea() { return 3.14 * radius * radius; }
+    int getRadius() { return radius; }
+    void setRadius(int radius) { this->radius = radius; }
 };
 
-Circle::Circle(){
+Circle::Circle()
+{
     radius = 1;
-    cout << "»ý¼ºÀÚ ½ÇÇà radius = " << radius << '\n';
+    cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ radius = " << radius << '\n';
 }
 
-Circle::Circle(int radius){
-    this -> radius = radius;
-    cout << "»ý¼ºÀÚ ½ÇÇà radius = " << radius << '\n';
+Circle::Circle(int radius)
+{
+    this->radius = radius;
+    cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ radius = " << radius << '\n';
 }
 
-Circle::~Circle(){
-    cout << "¼Ò¸êÀÚ ½ÇÇà radius = " << radius << '\n';
+Circle::~Circle()
+{
+    cout << "ï¿½Ò¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ radius = " << radius << '\n';
 }
 
-void increase(Circle c){
+void increase(Circle c)
+{
     int r = c.getRadius();
-    c.setRadius(r+1);
+    c.setRadius(r + 1);
 }
 
-int main(){
+int main()
+{
     Circle waffle(30);
     increase(waffle);
     cout << waffle.getRadius() << '\n';
