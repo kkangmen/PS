@@ -1,55 +1,98 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <vector>
+#include <algorithm>
+#define MAX 3000
 using namespace std;
 
 char board[50][50];
-int n, m;
+string WB[] = {
+    "WBWBWBWB",
+    "BWBWBWBW",
+    "WBWBWBWB",
+    "BWBWBWBW",
+    "WBWBWBWB",
+    "BWBWBWBW",
+    "WBWBWBWB",
+    "BWBWBWBW"};
+string BW[] = {
+    "BWBWBWBW",
+    "WBWBWBWB",
+    "BWBWBWBW",
+    "WBWBWBWB",
+    "BWBWBWBW",
+    "WBWBWBWB",
+    "BWBWBWBW",
+    "WBWBWBWB"};
 
+int cntwb(int k, int p)
+{
+    int cnt = 0;
+    int r = 0;
+    for (int i = k; i < k + 8; i++)
+    {
+        int c = 0;
+        for (int j = p; j < p + 8; j++)
+        {
+            if (board[i][j] != WB[r][c])
+            {
+                cnt++;
+            }
+            c++;
+        }
+        r++;
+    }
+    return cnt;
+}
+int cntbw(int k, int p)
+{
+    int cnt = 0;
+    int r = 0;
+    for (int i = k; i < k + 8; i++)
+    {
+        int c = 0;
+        for (int j = p; j < p + 8; j++)
+        {
+            if (board[i][j] != BW[r][c])
+            {
+                cnt++;
+            }
+            c++;
+        }
+        r++;
+    }
+    return cnt;
+}
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
+    int n, m;
     cin >> n >> m;
     for (int i = 0; i < n; i++)
     {
-        string row;
-        cin >> row;
-        for (int j = 0; j < row.size(); j++)
+        for (int j = 0; j < m; j++)
         {
-            board[i][j] = row[j];
+            cin >> board[i][j];
         }
     }
 
-    for (int i, j = 0; i + 8 <= n && j + 8 <= m; i++, j++)
+    int ans = MAX;
+    for (int i = 0; i + 7 < n; i++)
     {
-        if (board[i][j] = 'W')
+        for (int j = 0; j + 7 < m; j++)
         {
-            int cnt = 0;
-            for (int k = i; k < i + 8; k++)
+            // cout << i << ' ' << j << '\n';
+            //  cout << cntbw(i) << ' ';
+            int val = min(cntbw(i, j), cntwb(i, j));
+            if (val < ans)
             {
-                if (k % i == 0)
-                {
-                    for (int l = j; l < j + 8; l++)
-                    {
-                        if (l %)
-                    }
-                }
-                else
-                {
-                    for (int l = j; l < j + 8; l++)
-                    {
-                        if (board[])
-                    }
-                }
+                ans = val;
             }
         }
-        else
-        {
-            int cnt = 0;
-        }
     }
+    cout << ans << '\n';
     return 0;
 }
