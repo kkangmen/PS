@@ -6,21 +6,26 @@ using namespace std;
 bool isused[10];
 int a[10];
 int n, m;
-void func(int x)
+
+void func(int x, int k)
 {
-    if (x == m){
-        for (int i = 0; i < m; i++){
+    if (x == m)
+    {
+        for (int i = 0; i < m; i++)
+        {
             cout << a[i] << ' ';
         }
         cout << '\n';
         return;
     }
 
-    for (int i = 1; i <= n; i++){
-        if (isused[i] == false){
+    for (int i = k; i <= n; i++)
+    {
+        if (isused[i] == false)
+        {
             isused[i] = true;
             a[x] = i;
-            func(x+1);
+            func(x + 1, i + 1);
             isused[i] = false;
         }
     }
@@ -32,7 +37,6 @@ int main()
     cout.tie(NULL);
 
     cin >> n >> m;
-
-    func(0);
+    func(0, 1);
     return 0;
 }

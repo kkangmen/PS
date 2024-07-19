@@ -3,12 +3,11 @@
 #include <vector>
 using namespace std;
 
-bool isused[10];
-int a[10];
 int n, m;
-void func(int x)
-{
-    if (x == m){
+int a[10];
+
+void go(int cnt){
+    if (cnt == m){
         for (int i = 0; i < m; i++){
             cout << a[i] << ' ';
         }
@@ -17,12 +16,8 @@ void func(int x)
     }
 
     for (int i = 1; i <= n; i++){
-        if (isused[i] == false){
-            isused[i] = true;
-            a[x] = i;
-            func(x+1);
-            isused[i] = false;
-        }
+        a[cnt] = i;
+        go(cnt+1);
     }
 }
 int main()
@@ -32,7 +27,6 @@ int main()
     cout.tie(NULL);
 
     cin >> n >> m;
-
-    func(0);
+    go(0);
     return 0;
 }
