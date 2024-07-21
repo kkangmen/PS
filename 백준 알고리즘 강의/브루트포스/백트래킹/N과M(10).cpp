@@ -5,12 +5,11 @@
 using namespace std;
 
 int n, m;
-int cnt[10];
-int num[10];
-int a[10];
 int temp[10];
-
-void go(int length)
+int num[10];
+int cnt[10];
+int a[10];
+void go(int length, int start)
 {
     if (length == m)
     {
@@ -21,15 +20,14 @@ void go(int length)
         cout << '\n';
         return;
     }
-
-    for (int i = 0; i < n; i++)
+    for (int i = start; i < n; i++)
     {
         if (cnt[i] > 0)
         {
             a[length] = i;
-            cnt[i] -= 1;
-            go(length + 1);
-            cnt[i] += 1;
+            cnt[i]--;
+            go(length + 1, i);
+            cnt[i]++;
         }
     }
 }
@@ -44,30 +42,29 @@ int main()
     {
         cin >> temp[i];
     }
-
     sort(temp, temp + n);
 
     int x = temp[0];
+    int k = 1;
     num[0] = temp[0];
     cnt[0] = 1;
-    int k = 1;
+
     for (int i = 1; i < n; i++)
     {
-        if (x != temp[i])
+        if (x == temp[i])
         {
-            num[k] = temp[i];
+            k--;
             cnt[k] += 1;
-            x = temp[i];
-            k += 1;
+            k++;
         }
         else
         {
-            k -= 1;
+            x = temp[i];
+            num[k] = temp[i];
             cnt[k] += 1;
             k += 1;
         }
     }
-
-    go(0);
+    go(0, 0);
     return 0;
 }
