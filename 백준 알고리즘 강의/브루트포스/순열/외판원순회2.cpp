@@ -41,16 +41,18 @@ int main()
             {
                 sum += w[a[i]][a[i + 1]];
             }
-            //cout << a[i] << "->" << a[i+1] << ": " << val << ' ';
+            // cout << a[i] << "->" << a[i+1] << ": " << val << ' ';
         }
-        if (possible && w[a[n]][a[1]] != 0){
+        if (possible && w[a[n]][a[1]] != 0)
+        {
             sum += w[a[n]][a[1]];
-            if (min > sum){
+            if (min > sum)
+            {
                 min = sum;
             }
         }
-        //cout << a[n] << "->" << a[1] << ": " << w[a[n]][a[1]] << ' ';
-        //cout << "비용: " << sum << '\n';
+        // cout << a[n] << "->" << a[1] << ": " << w[a[n]][a[1]] << ' ';
+        // cout << "비용: " << sum << '\n';
     } while (next_permutation(a + 1, a + n + 1));
     cout << min << '\n';
     return 0;
