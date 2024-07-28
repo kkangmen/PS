@@ -12,7 +12,7 @@ vector<int> teamB;
 int ans = 1e9;
 void go(int index, char team)
 {
-    //cout << "go(index, team): " << index << ',' << team << '\n';
+    cout << "go(index, team): " << index << ',' << team << '\n';
     if (team == 'a')
     {
         teamA.push_back(index);
