@@ -29,7 +29,6 @@ bool dfs(int x, int y, char color, int cnt)
             {
                 if (dfs(nx, ny, color, cnt + 1))
                 {
-                    cout << "Âü" << '\n';
                     return true;
                 }
             }
