@@ -20,7 +20,7 @@ int bfs(int x)
     {
         int y = q.front();
         q.pop();
-        for (int i = 0; graph[y].size(); i++)
+        for (int i = 0; i < graph[y].size(); i++)
         {
             int k = graph[y][i];
             if (isvisited[k] == false)
@@ -67,7 +67,16 @@ int main()
         memset(isvisited, false, sizeof(isvisited));
     }
 
-    cout << ans[1] << '\n';
-
+    int min = ans[1];
+    int index = 1;
+    for (int i = 2; i <= n; i++)
+    {
+        if (min > ans[i])
+        {
+            min = ans[i];
+            index = i;
+        }
+    }
+    cout << index << '\n';
     return 0;
 }
