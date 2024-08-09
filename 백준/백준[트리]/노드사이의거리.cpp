@@ -1,13 +1,10 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <vector>
 #include <queue>
 using namespace std;
 
 int n, m;
-vector<Edge> graph[1001];
-bool isvisited[1001];
-int dist[1001];
 class Edge
 {
 private:
@@ -29,8 +26,14 @@ public:
         return cost;
     }
 };
+vector<Edge> graph[1001];
+bool isvisited[1001];
+int dist[1001];
+
 void bfs(int start)
 {
+    memset(isvisited, false, sizeof(isvisited));
+    memset(dist, 0, sizeof(dist));
     queue<int> q;
     q.push(start);
     isvisited[start] = true;
@@ -62,12 +65,20 @@ int main()
         int x, y, z;
         cin >> x >> y >> z;
         graph[x].push_back(Edge(y, z));
+        graph[y].push_back(Edge(x, z));
     }
-    bfs(1);
 
-    for (int i = 1; i <= n; i++)
+    // bfs(1);
+    // for (int i = 1; i <= n; i++)
+    // {
+    //     cout << dist[i] << '\n';
+    // }
+    for (int i = 0; i < m; i++)
     {
-        cout << dist[i] << '\n';
+        int v, u;
+        cin >> v >> u;
+        bfs(v);
+        cout << dist[u] << '\n';
     }
     return 0;
 }
