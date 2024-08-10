@@ -10,11 +10,15 @@ bool isvisited[501];
 int val[501];
 int caseNum = 1;
 bool cycle = false;
-bool dfs(int x, int cnt)
+void dfs(int x, int cnt)
 {
     if (isvisited[x] == true)
     {
-        return cnt - val[x] >= 3;
+        if (cnt - val[x] >= 3)
+        {
+            cycle = true;
+        }
+        return;
     }
     isvisited[x] = true;
     val[x] = cnt;
@@ -23,14 +27,14 @@ bool dfs(int x, int cnt)
         int y = graph[x][i];
         dfs(y, cnt + 1);
     }
-    return false;
+    return;
 }
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-
+    freopen("input.txt", "r", stdin);
     while (true)
     {
         cin >> n >> m;
@@ -41,6 +45,11 @@ int main()
         }
         memset(isvisited, false, sizeof(isvisited));
         memset(val, 0, sizeof(val));
+        // for (int i = 0; i <= 501; i++)
+        // {
+        //     graph[i].clear();
+        // }
+        graph->clear();
         for (int i = 0; i < m; i++)
         {
             int v, u;
@@ -54,7 +63,9 @@ int main()
         {
             if (isvisited[i] == false)
             {
-                if (!dfs(i, 0))
+                cycle = false;
+                dfs(i, 0);
+                if (!cycle)
                 {
                     cnt++;
                 }
