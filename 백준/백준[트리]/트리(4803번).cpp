@@ -34,7 +34,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    freopen("input.txt", "r", stdin);
+    // freopen("input.txt", "r", stdin);
     while (true)
     {
         cin >> n >> m;
@@ -45,11 +45,10 @@ int main()
         }
         memset(isvisited, false, sizeof(isvisited));
         memset(val, 0, sizeof(val));
-        // for (int i = 0; i <= 501; i++)
-        // {
-        //     graph[i].clear();
-        // }
-        graph->clear();
+        for (int i = 0; i <= 501; i++)
+        {
+            graph[i].clear();
+        }
         for (int i = 0; i < m; i++)
         {
             int v, u;
