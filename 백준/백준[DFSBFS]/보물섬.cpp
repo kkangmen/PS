@@ -15,24 +15,25 @@ int ans = 0;
 
 void cntAns()
 {
-    int max = 0;
+    int num = 0;
     for (int i = 0; i < l; i++)
     {
         for (int j = 0; j < w; j++)
         {
-            if (max < dist[i][j])
+            if (num < dist[i][j])
             {
-                max = dist[i][j];
+                num = dist[i][j];
             }
         }
     }
-    ans = max;
+    ans = max(ans, num);
 }
 
 void bfs(int row, int col)
 {
     queue<pair<int, int>> q;
     q.push(make_pair(row, col));
+    dist[row][col] = 0;
     while (!q.empty())
     {
         int x = q.front().first;
@@ -44,7 +45,7 @@ void bfs(int row, int col)
             int ny = y + dy[i];
             if (0 <= nx && nx < l && 0 <= ny && ny < w)
             {
-                if (graph[nx][ny] == 'L')
+                if (graph[nx][ny] == 'L' && dist[nx][ny] == -1)
                 {
                     q.push(make_pair(nx, ny));
                     dist[nx][ny] = dist[x][y] + 1;
@@ -78,7 +79,7 @@ int main()
         {
             if (graph[i][j] == 'L')
             {
-                memset(dist, 0, sizeof(dist));
+                memset(dist, -1, sizeof(dist));
                 bfs(i, j);
             }
         }
