@@ -5,32 +5,23 @@ using namespace std;
 
 int n, m, r, c, d;
 int graph[51][51];
-int ans = 0;
-vector<int> v;
+bool isvisited[51][51];
+int dx[4] = {0, 1, 0, -1};
+int dy[4] = {1, 0, -1, 0};
+int cnt = 1;
 
 void dfs(int x, int y, int dir)
 {
-    if (graph[x][y] == 0)
+    for (int i = 0; i < 4; i++)
     {
-        ans++;
-    }
-
-    if (dir == 0)
-    {
-        int nx = x + 0;
-        int ny = y - 1;
-        if (graph[nx][ny] == 0)
+        d = (dir + 3 - i) % 4;
+        int nx = x + dx[d];
+        int ny = y + dy[d];
+        if (graph[nx][ny] == 0 && isvisited[nx][ny] == false)
         {
-            dfs(nx, ny, 3);
-        }
-    }
-    if (dir == 1)
-    {
-        int nx = x - 1;
-        int ny = y + 0;
-        if (graph[nx][ny] == 0)
-        {
-            dfs(nx, ny, 3);
+            isvisited[nx][ny] = true;
+            cnt++;
+            dfs(nx, ny, d);
         }
     }
 }
