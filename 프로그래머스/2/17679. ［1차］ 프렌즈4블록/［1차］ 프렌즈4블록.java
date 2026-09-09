@@ -3,99 +3,84 @@ import java.util.*;
 class Solution {
     
     String[][] map;
-    boolean[][] isChanged;
-    int answer;
+    boolean[][] changed;
     
-    public void changePosition(){
-        for (int j = 0; j < map[0].length; j++){
-            for (int i = map.length-1; i >= 0; i--){
+    public void moveToUp(int row, int col){
+        for (int j = 0; j < col; j++){
+            for (int i = row-1; i >= 0; i--){
                 if (map[i][j].equals("-")){
                     for (int k = i-1; k >= 0; k--){
                         if (!map[k][j].equals("-")){
                             map[i][j] = map[k][j];
                             map[k][j] = "-";
                             break;
-                        }
+                        }   
                     }
                 }
             }
-        }
+        }    
     }
     
-    public void countGone(){
-        for (int i = 0; i < isChanged.length; i++){
-            for (int j = 0; j < isChanged[i].length; j++){
-                if (isChanged[i][j]){
+    public int countChanged(int row, int col){
+        int num = 0;
+        for (int i = 0; i < row; i++){
+            for (int j = 0; j < col; j++){
+                if (changed[i][j]){
                     map[i][j] = "-";
-                    answer++;
+                    num++;
                 }
             }
         }
+        return num;
     }
     
-    public boolean checkMap(){
+    public boolean searchAll(int row, int col){
+        
         boolean flag = false;
-        for (int i = 0; i < map.length-1; i++){
-            for (int j = 0; j < map[i].length-1; j++){
+        
+        for (int i = 0; i < row-1; i++){
+            for (int j = 0; j < col-1; j++){
                 String s = map[i][j];
-                if (s.equals("-")){
-                    continue;
-                }
-                if (s.equals(map[i+1][j]) 
-                   && s.equals(map[i][j+1])
-                   && s.equals(map[i+1][j+1])){
-                   flag = true;
-                    isChanged[i][j] = true;
-                    isChanged[i+1][j] = true;
-                    isChanged[i][j+1] = true;
-                    isChanged[i+1][j+1] = true;
+                if (!s.equals("-")){
+                    if (map[i][j+1].equals(s) && map[i+1][j].equals(s)
+                       && map[i+1][j+1].equals(s)){
+                        changed[i][j] = true;
+                        changed[i+1][j] = true;
+                        changed[i][j+1] = true;
+                        changed[i+1][j+1] = true;
+                        flag = true;
+                    }
                 }
             }
-        }
+        }    
         return flag;
     }
     
     public int solution(int m, int n, String[] board) {
-        answer = 0;
+        int answer = 0;
         
         map = new String[m][n];
-        isChanged = new boolean[m][n];
-        
         for (int i = 0; i < m; i++){
             String s = board[i];
-            for (int j = 0; j < s.length(); j++){
+            for (int j = 0; j < n; j++){
                 map[i][j] = String.valueOf(s.charAt(j));
             }
         }
         
         while (true){
-            // 없어지는 게 있나?
-            if(!checkMap()){
+            
+            changed = new boolean[m][n];
+            
+            // 1. 전체 순회하면서 지워질 블록 1로 표시
+            if (!searchAll(m, n)){
                 break;
             }
             
-            // 없어진 개수 세기
-            countGone();
-            isChanged = new boolean[m][n];
+            // 2. 1개수 세고 문자 -> "-"로 변경
+            answer += countChanged(m, n);
             
-            // System.out.println("없어지는 거는 -로 바꿈");
-            // for (int i = 0; i < m; i++){
-            //     for (int j = 0; j < n; j++){
-            //         System.out.print(map[i][j] + " ");
-            //     }
-            //     System.out.println();
-            // }
-            
-            // 위치 바꾸기
-            changePosition();
-            
-            // System.out.println("위치 바꾸기");
-            // for (int i = 0; i < m; i++){
-            //     for (int j = 0; j < n; j++){
-            //         System.out.print(map[i][j] + " ");
-            //     }
-            //     System.out.println();
-            // }
+            // 3. "-" 위로 올리기
+            moveToUp(m, n);
         }
         return answer;
     }
