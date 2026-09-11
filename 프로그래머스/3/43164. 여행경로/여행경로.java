@@ -1,53 +1,49 @@
 import java.util.*;
 
 class Solution {
-    
-    boolean[] isVisited;
+    Map<String, List<String>> graph = new HashMap<>();
+    Map<String, boolean[]> used = new HashMap<>();
+    List<String> answer = new ArrayList<>();
     boolean flag = false;
+    int total;
     
-    public void dfs(int index, String dest, String[][] tickets, List<String> answer){
-        // System.out.println(tickets[index][0] + " " + dest);
+    public void bTracking(String cur, List<String> path) {
+        path.add(cur);
         
-        isVisited[index] = true;
-        answer.add(tickets[index][0]);
-        
-        // 종료 조건
-        if (answer.size() == tickets.length){
-            // System.out.println("종료조건");
-            
+        // 티켓을 모두 썼다면 = 방문한 공항이 티켓 수 + 1
+        if (path.size() == total + 1) {
+            answer = new ArrayList<>(path);   // 복사본 저장
             flag = true;
-            answer.add(tickets[index][1]);
-            // for (String s : answer){
-            //     System.out.print(s + " ");
-            // }
-            // System.out.println();
             return;
         }
         
-        for (int i = 0; i < tickets.length; i++){
-            if (!isVisited[i] && tickets[i][0].equals(dest)){
-                dfs(i, tickets[i][1], tickets, answer);
+        List<String> nexts = graph.getOrDefault(cur, Collections.emptyList());
+        boolean[] check = used.get(cur);
+        
+        for (int i = 0; i < nexts.size(); i++) {
+            if (!check[i]) {
+                check[i] = true;
+                bTracking(nexts.get(i), path);
                 if (flag) return;
+                check[i] = false;          // 백트래킹
             }
         }
         
-        isVisited[index] = false;
-        answer.remove(answer.size()-1);
+        path.remove(path.size() - 1);      // 실패 → 자기가 추가한 것 되돌리기
     }
     
     public String[] solution(String[][] tickets) {
-        List<String> answer = new LinkedList<>();
+        total = tickets.length;
         
-        Arrays.sort(tickets, (s1, s2) -> s1[1].compareTo(s2[1]));
-        isVisited = new boolean[tickets.length];
-        
-        for (int i = 0; i < tickets.length; i++){
-            if (tickets[i][0].equals("ICN")){
-                dfs(i, tickets[i][1], tickets, answer);
-                if (flag) break;
-            }
+        for (String[] t : tickets) {
+            graph.computeIfAbsent(t[0], k -> new ArrayList<>()).add(t[1]);
+        }
+        for (String key : graph.keySet()) {
+            Collections.sort(graph.get(key));              // 사전순
+            used.put(key, new boolean[graph.get(key).size()]);
         }
         
+        bTracking("ICN", new ArrayList<>());
         return answer.toArray(new String[0]);
     }
 }
